@@ -61,3 +61,20 @@ class RelevanceChecker:
 
         **Respond ONLY with one of the following labels: CAN_ANSWER, PARTIAL, NO_MATCH**
         """
+        
+        # now we call the llm and see what the response is
+        # calling the model, pulling the answer out of the response,
+        # and making sure that answer is actually usable.
+        try:
+            response = self.model.chat(
+                messages = [
+                    {"role": "user",
+                     "content": prompt
+                    }
+                ]
+            )
+        except Exception as e:
+            logger.error("Error")
+            return "No_MATCH"
+        
+        
